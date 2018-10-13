@@ -73,3 +73,41 @@ form > button {
     background: lightcoral;
     border-color: darkred;
 }
+
+.bgLogo {
+    background-image: url(../images/logo.png);
+    height: 100vh;
+    width: 100vw;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: contain; /* Resize the background image to cover the entire container */
+    background-color: #000066;
+    padding: 10px 0px;
+    background-attachment: fixed;
+    overflow: auto;
+}
+
+#welcome {
+    padding: calc 20px 20px;
+}
+
+.transparent-dark {
+    background-color: rgba(255, 255, 255, .93);
+    padding: 10px;
+    border-radius: 50px;
+}
+
+.big-button {
+    background-color: rgba(255, 255, 255, .93);
+    padding: 10px;
+    border-radius: 50px;
+    margin: 10px auto;
+    display: block;
+    width: 75%;
+    text-align: center;
+    color: #000000;
+}
+
+.big-button:hover {
+    background-color: #FFFFFF;
+}
