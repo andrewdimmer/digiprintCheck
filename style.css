@@ -1,3 +1,36 @@
-.small-image {
-    width: 100px
+.navy-background {
+    background-color: #000066!important;
+}
+
+#logo {
+    height: 40px;
+    width: 40px;
+    margin: 0px;
+}
+
+.float-right {
+    float: right;
+}
+
+section {
+    padding: 10px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-white {
+    color: #000000;
+}
+
+footer {
+    padding: 5px;
+}
+
+iframe {
+    border-width: 0px;
+    width: 100%;
+    height: auto;
+    overflow: inherit;
 }
