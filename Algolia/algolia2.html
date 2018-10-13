@@ -1,0 +1,103 @@
+<!doctype html>
+<head>
+  <meta charset="UTF-8">
+  <title>InstantSearch Demo</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.css">
+  <!-- Always use `2.x` versions in production rather than `2` to mitigate any side effects on your website,
+  Find the latest version on InstantSearch.js website: https://community.algolia.com/instantsearch.js/v2/guides/usage.html -->
+  <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+  <!-- <script src="../Algolia/algolia2contactsJSON.js"></script>
+  <script>
+        var keyword = "Andrew Dimmer";
+        var client = algoliasearch('9NH9FPR4Z6', '68d43c6f7e0482ed773c40582fda27e2');
+        var index = client.initIndex("digiprintCheck-" + keyword);
+        index.addObjects(contactsJSON, function(err, content) {
+          if (err) {
+            console.error(err);
+          }
+        });
+      
+      index.setSettings({
+      'searchableAttributes': [
+        'lastname',
+        'firstname',
+        'company',
+        'email',
+        'city',
+        'address'
+      ]
+    }, function(err, content) {
+      console.log(content);
+    });
+    </script> -->
+</head>
+<body>
+  <header>
+    <div>
+       <input id="search-input" placeholder="Search for products">
+       <!-- We use a specific placeholder in the input to guides users in their search. -->
+    </div>
+  </header>
+  <main>
+      <div id="hits"></div>
+      <div id="pagination"></div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.js"></script>
+    
+    <!-- TEMPLATE -->
+    <!-- Add this to your HTML document -->
+    <script type="text/html" id="hit-template">
+      <div class="hit">
+        <div class="hit-image">
+          <img src="{{image}}" alt="{{name}}">
+        </div>
+        <div class="hit-content">
+          <h3 class="hit-price">${{price}}</h3>
+          <h2 class="hit-name">{{{_highlightResult.name.value}}}</h2>
+          <p class="hit-description">{{{_highlightResult.description.value}}}</p>
+        </div>
+      </div>
+    </script>
+    <!-- END TEMPLATE -->
+    
+  <script>
+      var search = instantsearch({
+      // Replace with your own values
+      appId: 'latency',
+      apiKey: '6be0576ff61c053d5f9a3225e2a90f76', // search only API key, no ADMIN key
+      indexName: 'instant_search',
+      urlSync: true,
+      searchParameters: {
+        hitsPerPage: 10
+      }
+    });
+    
+    // Add this after the previous JavaScript code
+    search.addWidget(
+      instantsearch.widgets.searchBox({
+        container: '#search-input'
+      })
+    );
+    
+    // Add this after the previous JavaScript code
+    search.addWidget(
+      instantsearch.widgets.hits({
+        container: '#hits',
+        templates: {
+          item: document.getElementById('hit-template').innerHTML,
+          empty: "We didn't find any results for the search <em>\"{{query}}\"</em>"
+        }
+      })
+    );
+
+    // Add this after the other search.addWidget() calls
+    search.addWidget(
+      instantsearch.widgets.pagination({
+        container: '#pagination'
+      })
+    );
+    
+    // Add this after all the search.addWidget() calls
+    search.start();
+  </script>
+</body>

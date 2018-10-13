@@ -7,7 +7,7 @@
 // if you are using AMD module loader, algoliasearch will not be defined in window,
 // but in the AMD modules of the page
 
-var client = algoliasearch('VGXKB5XFTW', '••••••••••••••••••••••••••••••••');
+var client = algoliasearch('VGXKB5XFTW', 'aaa793df40bb67158d9188458b585930');
 var index = client.initIndex('your_index_name');
 
  index.setSettings({
