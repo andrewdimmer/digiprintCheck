@@ -27,3 +27,9 @@ section {
 footer {
     padding: 5px;
 }
+
+.editIcon {
+    width: 24px;
+    height: 24px;
+    margin: 0px 10px
+}
