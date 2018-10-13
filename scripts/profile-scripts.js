@@ -1,3 +1,19 @@
+// Initialize Firebase
+function initializeFirebase() {
+    var config = {
+        apiKey: "AIzaSyDhkUAmeeh45jNFD_pGlgO7HH5o_wqhyKg",
+        authDomain: "mhacks11-cgp.firebaseapp.com",
+        databaseURL: "https://mhacks11-cgp.firebaseio.com",
+        projectId: "mhacks11-cgp",
+        storageBucket: "mhacks11-cgp.appspot.com",
+        messagingSenderId: "82903113376"
+    };
+    firebase.initializeApp(config);
+}
+
+// Ensures that firebase is initialized on all pages
+initializeFirebase();
+
 //Profile page Firebase functions
 function getInfo(user) {
     if (user != null) {
