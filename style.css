@@ -27,10 +27,3 @@ section {
 footer {
     padding: 5px;
 }
-
-iframe {
-    border-width: 0px;
-    width: 100%;
-    height: auto;
-    overflow: inherit;
-}
