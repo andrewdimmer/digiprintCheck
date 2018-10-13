@@ -1,21 +1,27 @@
 //Profile page Firebase functions
-function getInfo(user) {
-    if (user != null) {
-        console.log("Display user profile information");
-        document.getElementById("userName").innerHTML = user.displayName;
-        document.getElementById("newName").value = user.displayName;
-        document.getElementById("userEmail").innerHTML = user.email;
-        document.getElementById("newEmail").value = user.email;
-        document.getElementById("userPassword").innerHTML = "********";
-    } else {
-        // Error handling
-        console.log("No user logged in");
-        document.getElementById("userName").innerHTML = "";
-        document.getElementById("newName").value = "";
-        document.getElementById("userEmail").innerHTML = "";
-        document.getElementById("newEmail").value = "";
-        document.getElementById("userPassword").innerHTML = "";
-    }
+function getInfo() {
+    document.getElementById("userName").innerHTML = "loading...";
+    document.getElementById("userEmail").innerHTML = "loading...";
+    document.getElementById("userPassword").innerHTML = "loading...";
+    setTimeout(function(){
+        var user = firebase.auth().currentUser;
+        if (user != null) {
+            console.log("Display user profile information");
+            document.getElementById("userName").innerHTML = user.displayName;
+            document.getElementById("newName").value = user.displayName;
+            document.getElementById("userEmail").innerHTML = user.email;
+            document.getElementById("newEmail").value = user.email;
+            document.getElementById("userPassword").innerHTML = "********";
+        } else {
+            // Error handling
+            console.log("No user logged in");
+            document.getElementById("userName").innerHTML = "";
+            document.getElementById("newName").value = "";
+            document.getElementById("userEmail").innerHTML = "";
+            document.getElementById("newEmail").value = "";
+            document.getElementById("userPassword").innerHTML = "";
+        }
+    }, 1000);
 }
 
 function updateName() {
@@ -26,9 +32,12 @@ function updateName() {
         displayName: newName,
     }).then(function() {
         // Update successful.
+        addGoodMessage("Name Updated Successfully");
+        getInfo();
         toggleEditName();
     }).catch(function(error) {
         // An error happened.
+        addBadMessage(error);
     });
 }
 
@@ -38,9 +47,12 @@ function updateEmail() {
 
     user.updateEmail(newEmail).then(function() {
         // Update successful.
+        addGoodMessage("Email Updated Successfully");
+        getInfo();
         toggleEditEmail();
     }).catch(function(error) {
         // An error happened.
+        addBadMessage(error);
     });
 }
 
@@ -52,12 +64,16 @@ function updatePassword() {
     if (newPassword == confirmPassword) {
         user.updatePassword(newPassword).then(function() {
             // Update successful.
+            addGoodMessage("Password Updated Successfully");
+            getInfo();
             toggleEditPassword();
         }).catch(function(error) {
             // An error happened.
+            addBadMessage(error);
         });
     } else {
         // Mismatch Passwords
+        addBadMessage("Warning: Passwords do not match. Please try again.");
     }
 }
 

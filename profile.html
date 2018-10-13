@@ -16,6 +16,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
     <script src="../scripts/firebase-digiprintcheck.js"></script>
     <script src="../scripts/profile-scripts.js"></script>
+    <script src="../scripts/messages.js"></script>
 </head>
 <body>
     <container id="mainContainer">
@@ -40,6 +41,7 @@
                 </ul>
             </div>
         </nav>
+        <section id="messages"></section>
         <section id="content">
             <h1>Your Digiprint Check Profile</h1>
             <h2>Current Information</h2>
@@ -89,9 +91,7 @@
                 </form>
             </div>
             <script>
-                firebase.auth().onAuthStateChanged(function(user) {
-                    getInfo(user);
-                });
+                getInfo();
             </script>
         </section>
     </container>

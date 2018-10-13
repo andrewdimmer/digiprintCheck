@@ -36,7 +36,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 function logout() {
     firebase.auth().signOut().then(function() {
         console.log('Signed Out');
+        addGoodMessage("Logged Out Successfully");
     }, function(error) {
         console.error('Sign Out Error', error);
+        
     });
 }
