@@ -22,8 +22,8 @@ var index = client.initIndex('your_index_name');
 
   var search = instantsearch({
     // Replace with your own values
-    appId: 'latency',
-    apiKey: '6be0576ff61c053d5f9a3225e2a90f76', // search only API key, no ADMIN key
+    appId: 'VGXKB5XFTW',
+    apiKey: 'aaa793df40bb67158d9188458b585930', // search only API key, no ADMIN key
     indexName: 'instant_search',
     urlSync: true,
     searchParameters: {
