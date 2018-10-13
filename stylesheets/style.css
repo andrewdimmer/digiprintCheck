@@ -33,3 +33,23 @@ footer {
     height: 24px;
     margin: 0px 10px
 }
+
+input {
+    margin: 0px 10px 0px 0px;
+    padding: 1px 5px;
+    width: 200px
+}
+
+form > button {
+    margin: 0px 10px 0px 0px;
+}
+
+.float-left {
+    float: left;
+    margin-right: 10px;
+}
+
+.profile-line {
+    overflow: auto;
+    padding-bottom: 10px;
+}

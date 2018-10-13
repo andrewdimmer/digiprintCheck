@@ -43,9 +43,51 @@
         <section id="content">
             <h1>Your Digiprint Check Profile</h1>
             <h2>Current Information</h2>
-            <p><a href="#"><img src="../images/editIcon.png" alt="Edit Icon" class="editIcon"/></a><strong>Name: </strong><span id="userName"></span></p>
-            <p><a href="#"><img src="../images/editIcon.png" alt="Edit Icon" class="editIcon"/></a><strong>Email: </strong><span id="userEmail"></span></p>
-            <p><a href="#"><img src="../images/editIcon.png" alt="Edit Icon" class="editIcon"/></a><strong>Password: </strong><span id="userPassword"></span></p>
+            <div class="profile-line">
+                <div class="float-left">
+                    <a id="editNameIcon" href="#" onclick="toggleEditName();">
+                        <img src="../images/editIcon.png" alt="Edit Icon" class="editIcon"/>
+                    </a>
+                    <strong>Name: </strong>
+                    <span id="userName"></span>
+                </div>
+                <form id="editNameForm" class="float-left" style="display: none;">
+                    <input type="text" name="newName" id="newName"/>
+                    <button type="submit" onclick="updateName();">Update</button>
+                    <button type="submit" onclick="toggleEditName();">Cancel</button>
+                </form>
+            </div>
+            
+            <div class="profile-line">
+                <div class="float-left">
+                    <a id="editEmailIcon" href="#" onclick="toggleEditEmail();">
+                        <img src="../images/editIcon.png" alt="Edit Icon" class="editIcon"/>
+                    </a>
+                    <strong>Email: </strong>
+                    <span id="userEmail"></span>
+                </div>
+                <form id="editEmailForm" class="float-left" style="display: none;">
+                    <input type="text" name="newEmail" id="newEmail" style="width: 300px;"/>
+                    <button type="submit" onclick="updateEmail();">Update</button>
+                    <button type="submit" onclick="toggleEditEmail();">Cancel</button>
+                </form>
+            </div>
+            
+            <div class="profile-line">
+                <div class="float-left">
+                    <a id="editPasswordIcon" href="#" onclick="toggleEditPassword();">
+                        <img src="../images/editIcon.png" alt="Edit Icon" class="editIcon"/>
+                    </a>
+                    <strong>Password: </strong>
+                    <span id="userPassword"></span>
+                </div>
+                <form id="editPasswordForm" class="float-left" style="display: none;">
+                    <input type="password" name="newPassword" id="newPassword" placeholder="New Password"/>
+                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password"/>
+                    <button type="submit" onclick="updatePassword();">Update</button>
+                    <button type="submit" onclick="toggleEditPassword();">Cancel</button>
+                </form>
+            </div>
             <script>
                 firebase.auth().onAuthStateChanged(function(user) {
                     getInfo(user);
