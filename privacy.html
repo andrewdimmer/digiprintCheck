@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    <link rel="shortcut icon" type="image/png" href="../images/logo.png"/>
     
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -13,26 +14,15 @@
     
     <!-- Initialize Google Firebase; Must be first! -->
     <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyDhkUAmeeh45jNFD_pGlgO7HH5o_wqhyKg",
-            authDomain: "mhacks11-cgp.firebaseapp.com",
-            databaseURL: "https://mhacks11-cgp.firebaseio.com",
-            projectId: "mhacks11-cgp",
-            storageBucket: "mhacks11-cgp.appspot.com",
-            messagingSenderId: "82903113376"
-        };
-        firebase.initializeApp(config);
-    </script>
-    <script src="../firebase-digiprintcheck.js"></script>
+    <script src="../scripts/firebase-digiprintcheck.js"></script>
+    <script src="../scripts/messages.js"></script>
 </head>
 <body>
     <container id="mainContainer">
         <!-- Navigation -->
         
         <nav class="navbar navbar-dark bg-primary navbar-expand-lg navy-background">
-        <a class="navbar-brand" href="#"><img id="logo" src="logo.png" alt="Digiprint Check Logo"></a>
+        <a class="navbar-brand" href="#"><img id="logo" src="../images/logo.png" alt="Digiprint Check Logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -40,6 +30,9 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
                     </li>
                     <li class="nav-item">
                         <a id="lphref" class="nav-link" href="../login.html"><span id="lptext">Login</span></a>
@@ -50,6 +43,7 @@
                 </ul>
             </div>
         </nav>
+        <section id="messages"></section>
         <section id="content">
             <h1>Privacy Policy</h1>
             <p>Effective date: October 13, 2018</p>
