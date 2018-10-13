@@ -20,8 +20,7 @@
 <body>
     <container id="mainContainer">
         <!-- Navigation -->
-        
-        <nav class="navbar navbar-dark bg-primary navbar-expand-lg navy-background">
+        <nav id="indexNav" class="navbar navbar-dark bg-primary navbar-expand-lg navy-background">
         <a class="navbar-brand" href="#"><img id="logo" src="../images/logo.png" alt="Digiprint Check Logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -43,7 +42,18 @@
                 </ul>
             </div>
         </nav>
-        <section id="messages"></section>
+        <div id="bgContainer">
+            <section id="messages"></section>
+            <section id="welcome">
+                <div class="transparent-dark">
+                    <h1 class="text-center">Welcome to Digiprint Check</h1>
+                    <h2 class="text-center">Check your digital footprint ahead of time to avoid surprises!</h2>
+                </div>
+                <a class="big-button" href="../login.html"><h3>Login or Sign Up</h3></a>
+                <a class="big-button" href="#search"><h3>Start a Search</h3></a>
+                <a class="big-button" href="../about.html"><h3>About</h3></a>
+            </section>
+        </div>
         <section id="content">
             <h1>Digiprint Check</h1>
             <h2>Check your digital footprint ahead of time to avoid surprises!</h2>
@@ -53,4 +63,15 @@
 <footer class="navy-background">
     <p class="text-center text-white">Copyright 2018</p>
 </footer>
+<script src="../scripts/index2_0.js"></script>
+<script>
+    setTimeout(function(){
+        loadIndex_html(window.location.href);
+    }, 250);
+    window.onhashchange = function() {
+        setTimeout(function(){
+            loadIndex_html(window.location.href);
+        }, 250);
+    }
+</script>
 </html>
