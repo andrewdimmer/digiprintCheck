@@ -39,6 +39,7 @@
     </div>
   </header>
   <main>
+      <div id="sort-by"> </div>
       <div id="hits"></div>
       <div id="pagination"></div>
   </main>
@@ -71,9 +72,22 @@
         hitsPerPage: 10
       }
     });
-
-
-
+    search.addWidget(
+    instantsearch.widgets.sortBySelector({
+    container: '#sort-by',
+    autoHideContainer: true,
+    indices: [
+      {
+        name: 'your_index_name',
+        label: 'Most relevant'
+      },
+      {
+        name: 'your_index_name_price_asc',
+        label: 'Lowest price'
+      }
+    ]
+    })
+    );
     // Add this after the previous JavaScript code
     search.addWidget(
       instantsearch.widgets.searchBox({
@@ -81,16 +95,7 @@
       })
     );
 
-    search.addWidget(
-  instantsearch.widgets.sortBySelector({
-    container: '#sort-by-container',
-    indices: [
-      {name: 'instant_search', label: 'Most relevant'},
-      {name: 'instant_search_price_asc', label: 'Lowest price'},
-      {name: 'instant_search_price_desc', label: 'Highest price'}
-    ]
-  })
-);
+
 
     // Add this after the previous JavaScript code
     search.addWidget(
@@ -109,6 +114,8 @@
         container: '#pagination'
       })
     );
+
+
 
     // Add this after all the search.addWidget() calls
     search.start();
