@@ -90,6 +90,18 @@
       })
     );
 
+// Selection and Filtering
+    search.addWidget(
+      instantsearch.widgets.sortBySelector({
+        container: '#sort-by-container',
+    indices: [
+      {name: 'instant_search', label: 'Most relevant'},
+      {name: 'instant_search_price_asc', label: 'Lowest price'},
+      {name: 'instant_search_price_desc', label: 'Highest price'}
+         ]
+      })
+   );
+
     // Add this after the other search.addWidget() calls
     search.addWidget(
       instantsearch.widgets.pagination({
