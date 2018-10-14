@@ -6,30 +6,26 @@
   <!-- Always use `2.x` versions in production rather than `2` to mitigate any side effects on your website,
   Find the latest version on InstantSearch.js website: https://community.algolia.com/instantsearch.js/v2/guides/usage.html -->
   <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
-  <!-- <script src="../Algolia/algolia2contactsJSON.js"></script>
+   <!-- <script src="../Algolia/algolia2contactsJSON.js"></script> -->
   <script>
-        var keyword = "Andrew Dimmer";
+        var dataID = "Andrew Dimmer";
         var client = algoliasearch('9NH9FPR4Z6', '68d43c6f7e0482ed773c40582fda27e2');
-        var index = client.initIndex("digiprintCheck-" + keyword);
-        index.addObjects(contactsJSON, function(err, content) {
-          if (err) {
-            console.error(err);
-          }
-        });
+        var index = client.initIndex("digiprintCheck-" + dataID);
+        const records = getUserSearchData(dataID);
+        index.addObjects(records);
 
       index.setSettings({
       'searchableAttributes': [
-        'lastname',
-        'firstname',
-        'company',
-        'email',
-        'city',
-        'address'
+        'category',
+        'displayLink',
+        'link',
+        'snippet ',
+        'title'
       ]
     }, function(err, content) {
       console.log(content);
     });
-    </script> -->
+    </script>
 </head>
 <body>
   <header>
@@ -41,7 +37,7 @@
     </div>
   </header>
   <main>
-      <div id="free-shipping"></div>
+      <div id="free-shipping"> </div>
       <div id="hits"></div>
       <div id="pagination"></div>
   </main>
@@ -66,8 +62,8 @@
   <script>
       var search = instantsearch({
       // Replace with your own values
-      appId: 'VGXKB5XFTW',
-      apiKey: 'aaa793df40bb67158d9188458b585930', // search only API key, no ADMIN key
+      appId: '9NH99NH9FPR4Z6',
+      apiKey: '6be0576ff61c053d5f9a3225e2a90f76', // search only API key, no ADMIN key
       indexName: 'instant_search',
       urlSync: true,
       searchParameters: {
@@ -76,15 +72,24 @@
     });
 
     search.addWidget(
-  instantsearch.widgets.sortBySelector({
+    instantsearch.widgets.sortBySelector({
     container: '#sort-by-container',
+    autoHideContainer: true,
     indices: [
-      {name: 'instant_search', label: 'Most relevant'},
-      {name: 'instant_search_price_asc', label: 'Lowest price'},
-      {name: 'instant_search_price_desc', label: 'Highest price'}
+      {
+        name: 'instant_search', label: 'Most relevant'
+      },
+      {
+        name: 'your_index_name',
+        label: 'Most relevant'
+      },
+      {
+        name: 'your_index_name_price_asc',
+        label: 'Lowest price'
+      }
     ]
-  })
-);
+    })
+    );
 
   search.addWidget(
   instantsearch.widgets.menuSelect({
@@ -120,7 +125,6 @@
         }
       })
     );
-
     search.addWidget(
       instantsearch.widgets.toggle({
         container: '#free-shipping',
