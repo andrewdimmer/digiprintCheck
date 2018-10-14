@@ -14,6 +14,7 @@ data<- fromJSON(file="opensearch.json")
 json_data<-as.data.frame(data)
 #print(json_data)
 ```
+
 #Category Table Count
 ```{r, echo=FALSE}
 table(json_data$category)
@@ -21,7 +22,8 @@ table(json_data$category)
 ggplot(json_data)+
   geom_bar(aes(category,fill=category))+
   ggtitle("Category Bar Chart")+
-  theme_minimal()
+  theme_minimal()+
+  theme(aspect.ratio=1)
 ```
 
 #Social Mentions Total
@@ -34,7 +36,8 @@ summarize(json_data_social, count=n())
 ggplot(json_data_social)+
   geom_bar(aes(social,fill=social))+
   ggtitle("Social displayLink Bar Chart")+
-  theme_linedraw()
+  theme_linedraw()+
+  theme(aspect.ratio=1)
 ```
 
 #Technology Mentions Total
@@ -47,7 +50,8 @@ summarize(json_data_technology, count=n())
 ggplot(json_data_technology)+
   geom_bar(aes(technology,fill=technology))+
   ggtitle("Technology displayLink Bar Chart")+
-  theme_linedraw()
+  theme_linedraw()+
+  theme(aspect.ratio=1)
 ```
 
 #Education Mentions Total
@@ -62,7 +66,8 @@ ggplot(json_data_education)+
   ggtitle("Education displayLink Bar Chart")+
   coord_flip()+
   theme(legend.position = "top")+
-  theme_linedraw()
+  theme_linedraw()+
+  theme(aspect.ratio=1)
 ```
 
 #Government Mentions Total
@@ -75,18 +80,21 @@ summarize(json_data_government, count=n())
 ggplot(json_data_government)+
   geom_bar(aes(government,fill=government))+
   ggtitle("Government displayLink Bar Chart")+
-  theme_linedraw()
+  theme_linedraw()+
+  theme(aspect.ratio=1)
 ```
 
 #Category by displayLink
-
 ```{r,echo=FALSE}
 ggplot(json_data)+
   geom_bar(aes(category,fill=displayLink,linetype=displayLink),color="black", size=1,position=position_dodge())+
   theme(legend.position = "top")+
   ggtitle("Category Bar Chart by displayLink")+
-  theme_classic()
+  theme_classic()+
+  theme(aspect.ratio=1)
 ```
+
+
 
 #Further Analysis
 
@@ -111,7 +119,7 @@ knitr::include_graphics("./Capture4.png")
 ```
 
 ```{r,echo=FALSE}
-#nosense
+#FACET_WRAPS
  # ggplot(json_data)+
  #   geom_bar(aes(category,fill=displayLink))+
  #   facet_wrap(~displayLink)+
@@ -119,7 +127,7 @@ knitr::include_graphics("./Capture4.png")
 ```
 
 ```{r,echo=FALSE}
-#nosense
+#FACET_WRAPS
  # ggplot(json_data)+
  #   geom_bar(aes(displayLink,fill=category))+
  #   facet_wrap(~category)+
