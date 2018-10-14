@@ -41,7 +41,7 @@
     </div>
   </header>
   <main>
-      <div id="sort-by"> </div>
+      <div id="free-shipping"> </div>
       <div id="hits"></div>
       <div id="pagination"></div>
   </main>
@@ -129,7 +129,19 @@
         }
       })
     );
-
+    search.addWidget(
+      instantsearch.widgets.toggle({
+        container: '#free-shipping',
+        attributeName: 'free_shipping',
+        label: 'Free Shipping',
+        values: {
+          on: true,
+        },
+        templates: {
+          header: 'Shipping'
+        }
+      })
+    );
     // Add this after the other search.addWidget() calls
     search.addWidget(
       instantsearch.widgets.pagination({
