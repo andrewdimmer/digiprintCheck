@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Digiprint Check</title>
+    <title>Analysis | Digiprint Check</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -20,15 +20,16 @@
 <body>
     <container id="mainContainer">
         <!-- Navigation -->
-        <nav id="indexNav" class="navbar navbar-dark bg-primary navbar-expand-lg navy-background">
+        
+        <nav class="navbar navbar-dark bg-primary navbar-expand-lg navy-background">
         <a class="navbar-brand" href="#"><img id="logo" src="../images/logo.png" alt="Digiprint Check Logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../about.html">About</a>
@@ -42,51 +43,13 @@
                 </ul>
             </div>
         </nav>
-        <div id="bgContainer">
-            <section id="messages"></section>
-            <section id="welcome" style="display: none;">
-                <div class="transparent-dark">
-                    <h1 class="text-center">Welcome to Digiprint Check</h1>
-                    <h2 class="text-center">Check your digital footprint ahead of time to avoid surprises!</h2>
-                </div>
-                <a class="big-button" href="../login.html"><h3>Login or Sign Up</h3></a>
-                <a class="big-button" href="../about.html"><h3>About</h3></a>
-            </section>
-        </div>
-        <section id="content" style="display: none;">
-            <h1>Digiprint Check</h1>
-            <h2>Check your digital footprint ahead of time to avoid surprises!</h2>
-            <h3>Get new search</h3>
-            <form target="garbageCollector" id="newSearch">
-                <input type="text" name="firstName" id="firstName" placeholder="First Name"/>
-                <input type="text" name="lastName" id="lastName" placeholder="Last Name"/>
-                <button type="submit" onclick="searchForResults();">Search</button>
-            </form>
-            <iframe name="garbageCollector" style="display: none;"></iframe>
-            <h3>Get existing data from database</h3>
-            <div id="pastResults"></div>
-            <script>
-                firebase.auth().onAuthStateChanged(function(user) {
-                    if (user) {
-                        displayPastResults();
-                    }
-                });
-            </script>
+        <section id="messages"></section>
+        <section id="content">
+            <h1>Analysis</h1>
         </section>
     </container>
 </body>
 <footer class="navy-background">
     <p class="text-center text-white">Copyright 2018</p>
 </footer>
-<script src="../scripts/index2_0.js"></script>
-<script>
-    setTimeout(function(){
-        loadIndex_html(window.location.href);
-    }, 250);
-    window.onhashchange = function() {
-        setTimeout(function(){
-            loadIndex_html(window.location.href);
-        }, 250);
-    }
-</script>
 </html>
