@@ -105,9 +105,11 @@ function addSearchResultsToDatabase(dateTime, keyword, graphResponse, searchResp
 
 function getUserResultsList() {
     var user = db.collection("users").doc(firebase.auth().currentUser.uid);
+    console.log(firebase.auth().currentUser.uid);
     
-    user.get().then(function(doc) {
+    return user.get().then(function(doc) {
         if (doc.exists) {
+            console.log(doc.data());
             return doc.data();
         } else {
             return null;
@@ -121,7 +123,7 @@ function getUserResultsList() {
 function getUserGraphData(dataID) {
     var result = db.collection("results").doc(dataID);
     
-    result.get().then(function(doc) {
+    return result.get().then(function(doc) {
         if (doc.exists) {
             return doc.data().searchData;
         } else {
@@ -136,7 +138,7 @@ function getUserGraphData(dataID) {
 function getUserSearchData(dataID) {
     var result = db.collection("results").doc(dataID);
     
-    result.get().then(function(doc) {
+    return result.get().then(function(doc) {
         if (doc.exists) {
             return doc.data().searchData;
         } else {

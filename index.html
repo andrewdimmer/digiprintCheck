@@ -64,14 +64,7 @@
             </form>
             <iframe name="garbageCollector" style="display: none;"></iframe>
             <h3>Get existing data from database</h3>
-            <div id="pastResults"></div>
-            <script>
-                firebase.auth().onAuthStateChanged(function(user) {
-                    if (user) {
-                        displayPastResults();
-                    }
-                });
-            </script>
+            <div id="pastResultsContainer"></div>
         </section>
     </container>
 </body>
@@ -82,6 +75,11 @@
 <script>
     setTimeout(function(){
         loadIndex_html(window.location.href);
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                displayPastResults();
+            }
+        });
     }, 250);
     window.onhashchange = function() {
         setTimeout(function(){

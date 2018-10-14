@@ -29,13 +29,18 @@ function searchForResults() {
 }
 
 function displayPastResults() {
-    var pastResults = getUserResultsList();
-    
-    if (pastResults == null) {
-        document.getElementById("pastResults").innerHTML = "<p>No past results found.</p>";
-    } else {
-        for (var i = 0; i < pastResults.dateTime.length; i++) {
-            document.getElementById("pastResults").innerHTML += "<a class='big-button-dark' href='../analysis.html?data=" + firebase.auth().currentUser.uid + "-" + pastResults.dateTime[i] + "><h4>Searched for \"" + pastResults.keyword[i] + "\" on " + pastResults.dateTime[i] + "</h4></a>";
+    var pastResults;
+    var pastResultsPromise = getUserResultsList();
+    pastResultsPromise.then(function(pastData) {
+        console.log("pastDta", pastData);
+        pastResults = pastData;
+        if (pastResults == null) {
+            document.getElementById("pastResultsContainer").innerHTML = "<p>No past results found.</p>";
+        } else {
+            for (var i = 0; i < pastResults.dateTime.length; i++) {
+                var html = "<a class='big-button-dark' href='../analysis.html?data=" + firebase.auth().currentUser.uid + "-" + pastResults.dateTime[i] + "'><h4>Searched for \"" + pastResults.keyword[i] + "\" on " + pastResults.dateTime[i] + "</h4></a>";
+                document.getElementById("pastResultsContainer").innerHTML += html;
+            }
         }
-    }
+    });
 }
