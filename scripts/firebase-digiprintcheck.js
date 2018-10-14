@@ -105,3 +105,48 @@ function addSearchResultsToDatabase(dateTime, keyword, graphResponse, searchResp
     
     return dataID;
 }
+
+function getUserResultsList() {
+    var user = db.collection("users").doc(firebase.auth().currentUser);
+    
+    user.get().then(function(doc) {
+        if (doc.exists) {
+            return doc.data();
+        } else {
+            return null;
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+        return null;
+    });
+}
+
+function getUserGraphData(dataID) {
+    var result = db.collection("results").doc(dataID);
+    
+    result.get().then(function(doc) {
+        if (doc.exists) {
+            return doc.data().searchData;
+        } else {
+            return null;
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+        return null;
+    });
+}
+
+function getUserSearchData(dataID) {
+    var result = db.collection("results").doc(dataID);
+    
+    result.get().then(function(doc) {
+        if (doc.exists) {
+            return doc.data().searchData;
+        } else {
+            return null;
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+        return null;
+    });
+}

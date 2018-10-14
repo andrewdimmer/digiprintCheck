@@ -20,3 +20,20 @@ function loadIndex_html(url) {
         }
     }
 }
+
+function searchForResults() {
+    var href = "../loading.html?name=" + document.getElementById("firstName").value + "+" + document.getElementById("lastName").value;
+    window.location.href = href;
+}
+
+function displayPastResults() {
+    var pastResults = getUserResultsList();
+    
+    if (pastResults == null) {
+        document.getElementById("pastResults").innerHTML = "<p>No past results found.</p>";
+    } else {
+        for (var i = 0; i < pastResults.dateTime.length; i++) {
+            document.getElementById("pastResults").innerHTML += "<a class='big-button-dark' href='../analysis.html?data=" + firebase.auth().currentUser + "-" + pastResults.dateTime[i] + "><h4>Searched for \"" + pastResults.keyword[i] + "\" on " + pastResults.dateTime[i] + "</h4></a>";
+        }
+    }
+}

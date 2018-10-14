@@ -115,3 +115,18 @@ form > button {
 .big-button:hover {
     background-color: #FFFFFF;
 }
+
+.big-button-dark {
+    background-color: rgba(0, 0, 51, .93);
+    padding: 10px;
+    border-radius: 50px;
+    margin: 10px auto;
+    display: block;
+    width: 75%;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.big-button-dark:hover {
+    background-color: #000033;
+}
