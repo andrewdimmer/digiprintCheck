@@ -35,6 +35,8 @@
   <header>
     <div>
        <input id="search-input" placeholder="Search for products">
+       <div id="sort-by-container"></div>
+       <div id="categories-menuSelect"> </div>
        <!-- We use a specific placeholder in the input to guides users in their search. -->
     </div>
   </header>
@@ -72,10 +74,10 @@
         hitsPerPage: 10
       }
     });
-      
+
     search.addWidget(
     instantsearch.widgets.sortBySelector({
-    container: '#search-input',
+    container: '#sort-by-container',
     autoHideContainer: true,
     indices: [
       {
@@ -92,7 +94,22 @@
     ]
     })
     );
-      
+
+  search.addWidget(
+  instantsearch.widgets.menuSelect({
+    container: '#categories-menuSelect',
+    attributeName: 'hierarchicalCategories.lvl0',
+    limit: 10,
+    templates: {
+      header: 'Categories'
+    }
+  })
+);
+
+
+
+
+
     // Add this after the previous JavaScript code
     search.addWidget(
       instantsearch.widgets.searchBox({
