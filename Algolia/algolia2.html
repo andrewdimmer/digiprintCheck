@@ -72,11 +72,15 @@
         hitsPerPage: 10
       }
     });
+      
     search.addWidget(
     instantsearch.widgets.sortBySelector({
-    container: '#sort-by',
+    container: '#search-input',
     autoHideContainer: true,
     indices: [
+      {
+        name: 'instant_search', label: 'Most relevant'
+      },
       {
         name: 'your_index_name',
         label: 'Most relevant'
@@ -88,6 +92,7 @@
     ]
     })
     );
+      
     // Add this after the previous JavaScript code
     search.addWidget(
       instantsearch.widgets.searchBox({
