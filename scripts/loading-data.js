@@ -55,33 +55,37 @@ function loadRawData(name) {
 
 function populateItemsAndDatabase(name) {
     for (var r = 0; r < rawResponses.length; r++) {
-        if (rawResponses[r] != undefined) {
-            for (var c = 0; c < rawResponses[r].items.length; c++) {
-                var item = rawResponses[r].items[c];
-                if (r < 5) {
-                    // console.log("A " + r + ', ' + c);
-                    addItem("Technology", item);
-                } else if (r < 10) {
-                    // console.log("B " + r + ', ' + c);
-                    addItem("Social", item);
-                } else if (r < 15) {
-                    // console.log("C " + r + ', ' + c);
-                    addItem("Education", item);
-                } else if (r < 20) {
-                    // console.log("D " + r + ', ' + c);
+        console.log(r, rawResponses[r]);
+        try {
+            var DONOTUSE = rawResponses[r].items.length;
+        } catch (err) {
+            continue;
+        }
+        for (var c = 0; c < rawResponses[r].items.length; c++) {
+            var item = rawResponses[r].items[c];
+            if (r < 5) {
+                // console.log("A " + r + ', ' + c);
+                addItem("Technology", item);
+            } else if (r < 10) {
+                // console.log("B " + r + ', ' + c);
+                addItem("Social", item);
+            } else if (r < 15) {
+                // console.log("C " + r + ', ' + c);
+                addItem("Education", item);
+            } else if (r < 20) {
+                // console.log("D " + r + ', ' + c);
+                addItem("Government", item);
+            } else {
+                // console.log("E " + r + ', ' + c);
+                var alreadyExists = false;
+                for (var j = 0; j < searchResponse.length; j++) {
+                    if ((searchResponse[j].link.indexOf(item.link) > -1) && (item.link.indexOf(searchResponse[j].link) > -1)) {
+                        alreadyExists = true;
+                        break;
+                    }
+                }
+                if (!alreadyExists) {
                     addItem("Government", item);
-                } else {
-                    // console.log("E " + r + ', ' + c);
-                    var alreadyExists = false;
-                    for (var j = 0; j < searchResponse.length; j++) {
-                        if ((searchResponse[j].link.indexOf(item.link) > -1) && (item.link.indexOf(searchResponse[j].link) > -1)) {
-                            alreadyExists = true;
-                            break;
-                        }
-                    }
-                    if (!alreadyExists) {
-                        addItem("Government", item);
-                    }
                 }
             }
         }
