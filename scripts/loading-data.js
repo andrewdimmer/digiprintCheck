@@ -32,7 +32,7 @@ var count = 0;
 function loadRawData(name) {
     var searchEngines = ["001891209431675038151:wuy4_v4u9lu","001891209431675038151:7fblgpchug4","001891209431675038151:rschrth36d8","001891209431675038151:5pmxudi0ci0","001891209431675038151:aecyhkupixa"];
     for (var i = 0; i < searchEngines.length; i++) {
-        for(var j = 0; j < 10; j++) {
+        for(var j = 0; j < 5; j++) {
             var url = "https://www.googleapis.com/customsearch/v1?fields=items%28displayLink%2CfileFormat%2Clink%2Csnippet%2Ctitle%29&key=AIzaSyAqOtBOfmvwsspueM0240EhEP1SvhWswns&start=" + (j*10+1) + "&q=" + name + "&cx=" + searchEngines[i];
             var settings = {
                 "async": true,
@@ -46,11 +46,11 @@ function loadRawData(name) {
 
             $.ajax(url, settings).done(function (response) {
                 rawResponses[count] = response;
-                console.log(count);
-                if(count == (searchEngines.length*10)-1) {
-                    //populateItemsAndDatabase();
+                // console.log(count);
+                if(count == (searchEngines.length*5)-1) {
+                    populateItemsAndDatabase();
                 }
-                count++
+                count++;
             });
         }
     }
@@ -60,20 +60,20 @@ function populateItemsAndDatabase() {
     for (var r = 0; r < rawResponses.length; r++) {
         for (var c = 0; c < rawResponses[r].items.length; c++) {
             var item = rawResponses[r].items[c];
-            if (r < 10) {
-                console.log("A " + r + ', ' + c);
+            if (r < 5) {
+                // console.log("A " + r + ', ' + c);
                 addItem("Technology", item);
-            } else if (r < 20) {
-                console.log("B " + r + ', ' + c);
+            } else if (r < 10) {
+                // console.log("B " + r + ', ' + c);
                 addItem("Social", item);
-            } else if (r < 30) {
-                console.log("C " + r + ', ' + c);
+            } else if (r < 15) {
+                // console.log("C " + r + ', ' + c);
                 addItem("Education", item);
-            } else if (r < 40) {
-                console.log("D " + r + ', ' + c);
+            } else if (r < 20) {
+                // console.log("D " + r + ', ' + c);
                 addItem("Government", item);
             } else {
-                console.log("E " + r + ', ' + c);
+                // console.log("E " + r + ', ' + c);
                 var alreadyExists = false;
                 for (var j = 0; j < searchResponse.length; j++) {
                     if ((searchResponse[j].link.indexOf(item.link) > -1) && (item.link.indexOf(searchResponse[j].link) > -1)) {
