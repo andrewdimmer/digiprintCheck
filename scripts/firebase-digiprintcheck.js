@@ -30,6 +30,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         document.getElementById("lphref").href = "../login.html";
         document.getElementById("logout").style.display = "none";
     }
+    document.getElementById("lphref").style.display = "block";
 });
 
 // Logs the user out
