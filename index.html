@@ -57,13 +57,21 @@
             <h1>Digiprint Check</h1>
             <h2>Check your digital footprint ahead of time to avoid surprises!</h2>
             <h3>Get new search</h3>
-            <form id="newSearch">
-                    <input type="text" name="firstName" id="firstName" placeholder="First Name"/>
-                    <input type="text" name="lastName" id="lastName" placeholder="Last Name"/>
-                    <button type="submit" onclick="searchForResults();">Search</button>
-                </form>
+            <form target="garbageCollector" id="newSearch">
+                <input type="text" name="firstName" id="firstName" placeholder="First Name"/>
+                <input type="text" name="lastName" id="lastName" placeholder="Last Name"/>
+                <button type="submit" onclick="searchForResults();">Search</button>
+            </form>
+            <iframe name="garbageCollector" style="display: none;"></iframe>
             <h3>Get existing data from database</h3>
             <div id="pastResults"></div>
+            <script>
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+                        displayPastResults();
+                    }
+                });
+            </script>
         </section>
     </container>
 </body>

@@ -1,7 +1,8 @@
 // Initialize Firebase
 function initializeFirebase() {
     var config = {
-        apiKey: "AIzaSyDhkUAmeeh45jNFD_pGlgO7HH5o_wqhyKg",
+        apiKey: "AIzaSyAqOtBOfmvwsspueM0240EhEP1SvhWswns",
+        // apiKey: "AIzaSyDhkUAmeeh45jNFD_pGlgO7HH5o_wqhyKg",
         authDomain: "mhacks11-cgp.firebaseapp.com",
         databaseURL: "https://mhacks11-cgp.firebaseio.com",
         projectId: "mhacks11-cgp",
@@ -55,17 +56,18 @@ function initializeDatabase() {
       timestampsInSnapshots: true
     });
 }
+initializeDatabase();
 
 function addSearchResultsToDatabase(dateTime, keyword, graphResponse, searchResponse) {
-    var user = db.collection("users").doc(firebase.auth().currentUser);
+    var user = db.collection("users").doc(firebase.auth().currentUser.uid);
     
-    user.get().then(function(doc) {
+    var one = user.get().then(function(doc) {
         if (doc.exists) {
             console.log("Document data:", doc.data());
             var userData = doc.data();
             userData.dateTime.unshift(dateTime);
             userData.keyword.unshift(keyword);
-            db.collection("users").doc(firebase.auth().currentUser).set({
+            db.collection("users").doc(firebase.auth().currentUser.uid).set({
                 dateTime: userData.dateTime,
                 keyword: userData.keyword
             })
@@ -76,7 +78,7 @@ function addSearchResultsToDatabase(dateTime, keyword, graphResponse, searchResp
                 console.error("Error writing document: ", error);
             });
         } else {
-            db.collection("users").doc(firebase.auth().currentUser).set({
+            db.collection("users").doc(firebase.auth().currentUser.uid).set({
                 dateTime: [dateTime],
                 keyword: [keyword]
             })
@@ -91,23 +93,18 @@ function addSearchResultsToDatabase(dateTime, keyword, graphResponse, searchResp
         console.log("Error getting document:", error);
     });
     
-    var dataID = firebase.auth().currentUser + "-" + dateTime;
-    db.collection("results").doc(dataID).set({
+    var dataID = firebase.auth().currentUser.uid + "-" + dateTime;
+    var two = db.collection("results").doc(dataID).set({
         graphData: graphResponse,
         searchData: searchResponse
-    })
-    .then(function() {
-        console.log("Document successfully written!");
-    })
-    .catch(function(error) {
-        console.error("Error writing document: ", error);
-    });
+    }).then(function() { console.log("wrote to results"); });
     
-    return dataID;
+    
+    return Promise.all([one, two]).then(function() { return dataID; });
 }
 
 function getUserResultsList() {
-    var user = db.collection("users").doc(firebase.auth().currentUser);
+    var user = db.collection("users").doc(firebase.auth().currentUser.uid);
     
     user.get().then(function(doc) {
         if (doc.exists) {

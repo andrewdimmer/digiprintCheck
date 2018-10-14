@@ -3,7 +3,6 @@ var rawResponses = [];
 var graphResponse = {
     "category": [],
     "displayLink": [],
-    "fileFormat": [],
     "link": [],
     "snippet": [],
     "title": [],
@@ -13,7 +12,6 @@ var searchResponse = [];
 function addItem(category, item) {
     graphResponse.category.push(category);
     graphResponse.displayLink.push(item.displayLink);
-    graphResponse.fileFormat.push(item.fileFormat);
     graphResponse.link.push(item.link);
     graphResponse.snippet.push(item.snippet);
     graphResponse.title.push(item.title);
@@ -21,7 +19,6 @@ function addItem(category, item) {
     searchResponse.push({
         "category": category,
         "displayLink": item.displayLink,
-        "fileFormat": item.fileFormat,
         "link": item.link,
         "snippet": item.snippet,
         "title": item.title,
@@ -88,6 +85,9 @@ function populateItemsAndDatabase(name) {
         }
     }
     var keyword = name.substring(0, name.indexOf("+")) + " " + name.substring(name.indexOf("+")+1, name.length);
+    var dataIDPromise = addSearchResultsToDatabase((new Date()).toISOString(), keyword, graphResponse, searchResponse);
+    dataIDPromise.then(function(dataID) {
+        window.location.href = "../analysis.html?data=" + dataID;
+    });
     
-    window.location.href = "../analysis.html?data=" + addSearchResultsToDatabase((new Date()).toISOString(), keyword, graphResponse, searchResponse);
 }
