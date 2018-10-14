@@ -8,7 +8,8 @@
   <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
    <!-- <script src="../Algolia/algolia2contactsJSON.js"></script> -->
   <script>
-        var dataID = "Andrew Dimmer";
+        var url=window.location.href;
+        var dataID=url.substring(url.indexOf("?name=")+6, url.length);
         var client = algoliasearch('9NH9FPR4Z6', '68d43c6f7e0482ed773c40582fda27e2');
         var index = client.initIndex("digiprintCheck-" + dataID);
         const records = getUserSearchData(dataID);
