@@ -41,7 +41,7 @@
     </div>
   </header>
   <main>
-      <div id="free-shipping"> </div>
+      <div id="free-shipping"></div>
       <div id="hits"></div>
       <div id="pagination"></div>
   </main>
@@ -66,8 +66,8 @@
   <script>
       var search = instantsearch({
       // Replace with your own values
-      appId: 'latency',
-      apiKey: '6be0576ff61c053d5f9a3225e2a90f76', // search only API key, no ADMIN key
+      appId: 'VGXKB5XFTW',
+      apiKey: 'aaa793df40bb67158d9188458b585930', // search only API key, no ADMIN key
       indexName: 'instant_search',
       urlSync: true,
       searchParameters: {
@@ -76,24 +76,15 @@
     });
 
     search.addWidget(
-    instantsearch.widgets.sortBySelector({
+  instantsearch.widgets.sortBySelector({
     container: '#sort-by-container',
-    autoHideContainer: true,
     indices: [
-      {
-        name: 'instant_search', label: 'Most relevant'
-      },
-      {
-        name: 'your_index_name',
-        label: 'Most relevant'
-      },
-      {
-        name: 'your_index_name_price_asc',
-        label: 'Lowest price'
-      }
+      {name: 'instant_search', label: 'Most relevant'},
+      {name: 'instant_search_price_asc', label: 'Lowest price'},
+      {name: 'instant_search_price_desc', label: 'Highest price'}
     ]
-    })
-    );
+  })
+);
 
   search.addWidget(
   instantsearch.widgets.menuSelect({
@@ -129,6 +120,7 @@
         }
       })
     );
+
     search.addWidget(
       instantsearch.widgets.toggle({
         container: '#free-shipping',
