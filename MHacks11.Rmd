@@ -1,0 +1,106 @@
+```{r}
+library(rjson)
+library(dplyr)
+library(ggplot2)
+data<- fromJSON(file="opensearch.json")
+json_data<-as.data.frame(data)
+print(json_data)
+```
+
+```{r}
+table(json_data$category)
+
+ggplot(json_data)+
+  geom_bar(aes(category,fill=category))+
+  ggtitle("category Bar Chart")+
+  theme_minimal()
+```
+
+```{r}
+json_data_social<-as.data.frame(json_data[json_data$category == "Social", 2])
+names(json_data_social)[1]<-"social"
+
+summarize(json_data_social, count=n())
+
+ggplot(json_data_social)+
+  geom_bar(aes(social,fill=social))+
+  ggtitle("Social displayLink Bar Chart")+
+  theme_linedraw()
+```
+
+
+```{r}
+json_data_technology<-as.data.frame(json_data[json_data$category == "Technology", 2])
+names(json_data_technology)[1]<-"technology"
+
+summarize(json_data_technology, count=n())
+
+ggplot(json_data_technology)+
+  geom_bar(aes(technology,fill=technology))+
+  ggtitle("Technology displayLink Bar Chart")+
+  theme_linedraw()
+```
+
+```{r}
+json_data_education<-as.data.frame(json_data[json_data$category == "Education", 2])
+names(json_data_education)[1]<-"education"
+
+summarize(json_data_education, count=n())
+
+ggplot(json_data_education)+
+  geom_bar(aes(education,fill=education))+
+  ggtitle("Education displayLink Bar Chart")+
+  coord_flip()+
+  theme(legend.position = "top")+
+  theme_linedraw()
+```
+
+```{r}
+json_data_government<-as.data.frame(json_data[json_data$category == "Government", 2])
+names(json_data_government)[1]<-"government"
+
+summarize(json_data_government, count=n())
+
+ggplot(json_data_government)+
+  geom_bar(aes(government,fill=government))+
+  ggtitle("Government displayLink Bar Chart")+
+  theme_linedraw()
+```
+
+```{r}
+ggplot(json_data)+
+  geom_bar(aes(category,fill=displayLink,linetype=displayLink),color="black", size=1,position=position_dodge())+
+  theme(legend.position = "top")+
+  ggtitle("category Bar Chart by displayLink")
+```
+
+```{r}
+#nosense
+# ggplot(json_data)+
+#   geom_bar(aes(displayLink))+
+#   facet_wrap(~category)+
+#   ggtitle("displayLink Bar Chart")
+```
+
+```{r}
+# ggplot(json_data)+
+#   geom_bar(aes(category,fill=displayLink,linetype=displayLink),color="black", size=1, position = position_stack(reverse = TRUE))+
+#   coord_flip()+
+#   theme(legend.position = "top")+
+#   ggtitle("category Bar Chart by displayLink")+
+#   theme_dark()
+  
+```
+
+```{r}
+# ggplot(json_data)+
+#   geom_bar(aes(displayLink,linetype=category,fill=category),size=1,color="black", position = position_stack(reverse = TRUE))+
+#   coord_flip()+
+#   theme(legend.position = "top")+
+#   ggtitle("displayLinks Bar Chart by category")+
+#   theme_dark()
+```
+
+
+
+
