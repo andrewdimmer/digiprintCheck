@@ -1,22 +1,31 @@
-```{r}
-library(rjson)
-library(dplyr)
-library(ggplot2)
+---
+title: "Data Analysis"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r, echo=FALSE}
+suppressMessages(library(rjson,quietly = TRUE))
+suppressMessages(library(dplyr,quietly = TRUE))
+suppressMessages(library(ggplot2,quietly=TRUE))
 data<- fromJSON(file="opensearch.json")
 json_data<-as.data.frame(data)
-print(json_data)
+#print(json_data)
 ```
-
-```{r}
+#Category Table Count
+```{r, echo=FALSE}
 table(json_data$category)
 
 ggplot(json_data)+
   geom_bar(aes(category,fill=category))+
-  ggtitle("category Bar Chart")+
+  ggtitle("Category Bar Chart")+
   theme_minimal()
 ```
 
-```{r}
+#Social Mentions Total
+```{r, echo=FALSE}
 json_data_social<-as.data.frame(json_data[json_data$category == "Social", 2])
 names(json_data_social)[1]<-"social"
 
@@ -28,8 +37,8 @@ ggplot(json_data_social)+
   theme_linedraw()
 ```
 
-
-```{r}
+#Technology Mentions Total
+```{r, echo=FALSE}
 json_data_technology<-as.data.frame(json_data[json_data$category == "Technology", 2])
 names(json_data_technology)[1]<-"technology"
 
@@ -41,7 +50,8 @@ ggplot(json_data_technology)+
   theme_linedraw()
 ```
 
-```{r}
+#Education Mentions Total
+```{r,echo=FALSE}
 json_data_education<-as.data.frame(json_data[json_data$category == "Education", 2])
 names(json_data_education)[1]<-"education"
 
@@ -55,7 +65,8 @@ ggplot(json_data_education)+
   theme_linedraw()
 ```
 
-```{r}
+#Government Mentions Total
+```{r,echo=FALSE}
 json_data_government<-as.data.frame(json_data[json_data$category == "Government", 2])
 names(json_data_government)[1]<-"government"
 
@@ -67,40 +78,69 @@ ggplot(json_data_government)+
   theme_linedraw()
 ```
 
-```{r}
+#Category by displayLink
+
+```{r,echo=FALSE}
 ggplot(json_data)+
   geom_bar(aes(category,fill=displayLink,linetype=displayLink),color="black", size=1,position=position_dodge())+
   theme(legend.position = "top")+
-  ggtitle("category Bar Chart by displayLink")
+  ggtitle("Category Bar Chart by displayLink")+
+  theme_classic()
 ```
 
-```{r}
+#Further Analysis
+
+**Category by displayLink**
+```{r,echo=FALSE}
+knitr::include_graphics("./capture1.png")
+```
+
+**displayLink by Category**
+```{r,echo=FALSE}
+knitr::include_graphics("./capture2.png")
+```
+
+**displayLink Bar Chart Faceted by Category**
+```{r,echo=FALSE}
+knitr::include_graphics("./Capture3.png")
+```
+
+**Category Bar Chart Faceted by displayLink**
+```{r,echo=FALSE}
+knitr::include_graphics("./Capture4.png")
+```
+
+```{r,echo=FALSE}
 #nosense
-# ggplot(json_data)+
-#   geom_bar(aes(displayLink))+
-#   facet_wrap(~category)+
-#   ggtitle("displayLink Bar Chart")
+ # ggplot(json_data)+
+ #   geom_bar(aes(category,fill=displayLink))+
+ #   facet_wrap(~displayLink)+
+ #   ggtitle("Category Bar Chart")
 ```
 
-```{r}
-# ggplot(json_data)+
-#   geom_bar(aes(category,fill=displayLink,linetype=displayLink),color="black", size=1, position = position_stack(reverse = TRUE))+
-#   coord_flip()+
-#   theme(legend.position = "top")+
-#   ggtitle("category Bar Chart by displayLink")+
-#   theme_dark()
+```{r,echo=FALSE}
+#nosense
+ # ggplot(json_data)+
+ #   geom_bar(aes(displayLink,fill=category))+
+ #   facet_wrap(~category)+
+ #   ggtitle("displayLink Bar Chart")
+```
+
+```{r,echo=FALSE}
+ # ggplot(json_data)+
+ #   geom_bar(aes(category,fill=displayLink,linetype=displayLink),color="black", size=1, position = position_stack(reverse = TRUE))+
+ #   coord_flip()+
+ #   theme(legend.position = "top")+
+ #   ggtitle("category Bar Chart by displayLink")+
+ #   theme_dark()
   
 ```
 
-```{r}
-# ggplot(json_data)+
-#   geom_bar(aes(displayLink,linetype=category,fill=category),size=1,color="black", position = position_stack(reverse = TRUE))+
-#   coord_flip()+
-#   theme(legend.position = "top")+
-#   ggtitle("displayLinks Bar Chart by category")+
-#   theme_dark()
+```{r,echo=FALSE}
+ # ggplot(json_data)+
+ #   geom_bar(aes(displayLink,linetype=category,fill=category),size=1,color="black", position = position_stack(reverse = TRUE))+
+ #   coord_flip()+
+ #   theme(legend.position = "top")+
+ #   ggtitle("displayLinks Bar Chart by category")+
+ #   theme_dark()
 ```
-
-
-
-
