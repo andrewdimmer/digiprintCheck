@@ -88,7 +88,11 @@ form > button {
 }
 
 #welcome {
-    padding: calc 20px 20px;
+    padding: 20px 20px;
+}
+
+#loading {
+    padding: calc(50vh - 38px) 20px;
 }
 
 .transparent-dark {
