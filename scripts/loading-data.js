@@ -48,7 +48,7 @@ function loadRawData(name) {
                 rawResponses[count] = response;
                 // console.log(count);
                 if(count == (searchEngines.length*5)-1) {
-                    populateItemsAndDatabase();
+                    populateItemsAndDatabase(name);
                 }
                 count++;
             });
@@ -56,7 +56,7 @@ function loadRawData(name) {
     }
 }
 
-function populateItemsAndDatabase() {
+function populateItemsAndDatabase(name) {
     for (var r = 0; r < rawResponses.length; r++) {
         for (var c = 0; c < rawResponses[r].items.length; c++) {
             var item = rawResponses[r].items[c];
@@ -87,4 +87,7 @@ function populateItemsAndDatabase() {
             }
         }
     }
+    var keyword = name.substring(0, name.indexOf("+")) + " " + name.substring(name.indexOf("+")+1, name.length);
+    
+    window.location.href = "../analysis.html?data=" + addSearchResultsToDatabase((new Date()).toISOString(), keyword, graphResponse, searchResponse);
 }

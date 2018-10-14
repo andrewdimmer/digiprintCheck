@@ -44,3 +44,64 @@ function logout() {
         
     });
 }
+
+var db;
+function initializeDatabase() {
+    // Initialize Cloud Firestore through Firebase
+    db = firebase.firestore();
+
+    // Disable deprecated features
+    db.settings({
+      timestampsInSnapshots: true
+    });
+}
+
+function addSearchResultsToDatabase(dateTime, keyword, graphResponse, searchResponse) {
+    var user = db.collection("users").doc(firebase.auth().currentUser);
+    
+    user.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+            var userData = doc.data();
+            userData.dateTime.unshift(dateTime);
+            userData.keyword.unshift(keyword);
+            db.collection("users").doc(firebase.auth().currentUser).set({
+                dateTime: userData.dateTime,
+                keyword: userData.keyword
+            })
+            .then(function() {
+                console.log("Document successfully written!");
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+        } else {
+            db.collection("users").doc(firebase.auth().currentUser).set({
+                dateTime: [dateTime],
+                keyword: [keyword]
+            })
+            .then(function() {
+                console.log("Document successfully written!");
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+    
+    var dataID = firebase.auth().currentUser + "-" + dateTime;
+    db.collection("results").doc(dataID).set({
+        graphData: graphResponse,
+        searchData: searchResponse
+    })
+    .then(function() {
+        console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
+    
+    return dataID;
+}
