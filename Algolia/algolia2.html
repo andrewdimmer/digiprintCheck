@@ -16,7 +16,7 @@
             console.error(err);
           }
         });
-      
+
       index.setSettings({
       'searchableAttributes': [
         'lastname',
@@ -43,7 +43,7 @@
       <div id="pagination"></div>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.js"></script>
-    
+
     <!-- TEMPLATE -->
     <!-- Add this to your HTML document -->
     <script type="text/html" id="hit-template">
@@ -59,7 +59,7 @@
       </div>
     </script>
     <!-- END TEMPLATE -->
-    
+
   <script>
       var search = instantsearch({
       // Replace with your own values
@@ -71,14 +71,27 @@
         hitsPerPage: 10
       }
     });
-    
+
+
+
     // Add this after the previous JavaScript code
     search.addWidget(
       instantsearch.widgets.searchBox({
         container: '#search-input'
       })
     );
-    
+
+    search.addWidget(
+  instantsearch.widgets.sortBySelector({
+    container: '#sort-by-container',
+    indices: [
+      {name: 'instant_search', label: 'Most relevant'},
+      {name: 'instant_search_price_asc', label: 'Lowest price'},
+      {name: 'instant_search_price_desc', label: 'Highest price'}
+    ]
+  })
+);
+
     // Add this after the previous JavaScript code
     search.addWidget(
       instantsearch.widgets.hits({
@@ -90,25 +103,13 @@
       })
     );
 
-// Selection and Filtering
-    search.addWidget(
-      instantsearch.widgets.sortBySelector({
-        container: '#sort-by-container',
-    indices: [
-      {name: 'instant_search', label: 'Most relevant'},
-      {name: 'instant_search_price_asc', label: 'Lowest price'},
-      {name: 'instant_search_price_desc', label: 'Highest price'}
-         ]
-      })
-   );
-
     // Add this after the other search.addWidget() calls
     search.addWidget(
       instantsearch.widgets.pagination({
         container: '#pagination'
       })
     );
-    
+
     // Add this after all the search.addWidget() calls
     search.start();
   </script>
